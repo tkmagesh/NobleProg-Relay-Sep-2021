@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDOM Intro</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script>
+        var counter = 0;
+        function onBtnRenderClick(){
+            ++counter;
+            var appEle = React.createElement('div', {}, 
+                React.createElement('h1', {}, 'React.js'),
+                React.createElement('hr'),
+                React.createElement('div', null, 
+                    React.createElement('span', {}, 'Counter : '),
+                    React.createElement('span', {}, counter)
+                ),
+                React.createElement('div', {}, 
+                    React.createElement('h3', {}, 'Introduction'),
+                    React.createElement('p', {}, 'Enim qui laboris ullamco ullamco dolore exercitation ex consectetur qui eiusmod ullamco est et. Exercitation laborum consectetur in proident. Consectetur laboris officia labore quis tempor.Tempor laboris ullamco proident anim id nostrud ea qui. Sint adipisicing minim elit excepteur elit est excepteur consequat ad aliquip sit id ipsum ipsum. Incididunt cupidatat sit culpa ut laborum officia aute dolore ut non proident et dolor. Sunt sunt sit ipsum ullamco est aliqua culpa ut nulla est. Cupidatat est ad quis enim dolore ullamco pariatur laborum tempor elit. Sit voluptate nisi eu tempor. Laborum pariatur et veniam dolore ipsum pariatur nulla aute officia exercitation nulla irure do voluptate.'),
+                    React.createElement('p', {}, 'Sunt laborum enim aliqua tempor ex. Consequat Lorem cupidatat consequat elit laboris velit minim commodo ut consequat minim mollit laboris. Reprehenderit laboris incididunt eu sit. Nostrud consectetur mollit nisi id proident voluptate consequat officia consectetur dolore cillum elit velit. Minim amet nostrud nisi minim.Esse laboris velit in dolore. Tempor aute qui mollit enim incididunt esse dolore. Non esse nulla adipisicing do culpa mollit amet cillum occaecat officia. Nisi qui non tempor anim. Elit quis nulla culpa sit.'),
+                    React.createElement('p', {}, 'Qui Lorem mollit veniam commodo excepteur tempor labore irure nostrud mollit adipisicing aliqua fugiat anim. Consequat aliquip do ut nulla in proident cupidatat ad non id laboris anim ullamco irure. Commodo aliqua eiusmod ut consequat officia est. Elit esse dolor sint nulla et irure est est cillum occaecat sint occaecat irure.Commodo cupidatat enim et culpa dolor occaecat fugiat est aliqua irure ad. Voluptate id nisi officia magna aute nisi ipsum aliquip occaecat voluptate ullamco. Adipisicing veniam voluptate ea sunt dolore. Duis labore enim ad nulla cillum nostrud voluptate labore mollit non deserunt esse qui enim. Duis Lorem eu et proident in dolor exercitation fugiat ullamco est incididunt voluptate. Incididunt ipsum deserunt minim pariatur eu labore. Dolore culpa aliquip dolor cillum consequat eu pariatur minim voluptate pariatur tempor esse nostrud.'),
+                ),
+                React.createElement('div', {},
+                    React.createElement('h3', {}, 'Advantages'),
+                    React.createElement('ol', {}, 
+                        React.createElement('li', {}, 'Declarative'),
+                        React.createElement('li', {}, 'Efficient'),
+                    )
+                ),
+            )
+            ReactDOM.render(appEle, document.getElementById('root'))
+            console.log('header rendered')
+        }
+        function onDocumentLoad(){
+            var btnRender = document.getElementById('btnRender');
+            btnRender.addEventListener('click', onBtnRenderClick);
+        }
+        window.addEventListener('load', onDocumentLoad);
+
+    </script>
+</head>
+<body>
+    <input type="button" value="Render" id="btnRender">
+    <div id="root"></div>
+</body>
+</html>
