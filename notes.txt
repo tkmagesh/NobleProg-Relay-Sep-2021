@@ -1,0 +1,174 @@
+State
+    UI State
+        Data that supports the presentation needs of the application
+        This data is most UNLIKELY to be needed in other parts of the application
+        This data can be maintained in the component state
+
+    App State
+        Data that is used in the core application logic
+        This is is most LIKELY to be needed in other parts of the application
+        This data SHOULD NOT be maintained in the component state
+
+Store
+    Single source of truth for the application
+
+
+
+Bug Tracker
+    1. Bug
+        id
+        name
+        description
+        severity
+        status
+        project_id
+        created_by
+        created_at
+        updated_at
+
+    2. Project
+        id
+        name
+        description
+        bugs
+        users
+        created_at
+
+    3. User
+        id
+        name
+        email
+
+http://myapp.com/services/projects - 5 project objects (1 req)
+http://myapp.com/services/bugs - (10 bugs each) (5 reqs) 50 bug objects
+http://myapp.com/services/comments (50 requests)
+
+Total requests = 56 requests
+
+Tailor made API (to serve the UI needs of the application)
+http://myapp.com/services/projectInfo
+    projects
+        bugs
+            comments
+
+
+    projects
+        bugs stats (open count & closed count)
+
+    
+GraphQL
+
+TODO : How to build a graphql server in Java (springboot etc)
+
+Project {
+    id
+    name
+    bugs {
+        id
+        name
+        status
+    }
+    user {
+        name
+        email
+    }
+}
+
+GraphQL Operations
+    1. Query (retrive the data)
+    2. Mutation (update the data)
+
+
+Server Side
+    Types
+    Queries 
+        Resolvers
+            Collects the data from the data source (database, REST api)
+    Mutations
+    
+
+    Types example : Bug, Project, User, Comments
+    Query example : getBugs, getProjects, getUser, totalBugs
+
+
+    Master Data
+        Remains unchanged
+        Read Optimized
+
+    Analytical Data
+
+    Append Only (with very minimal updates)
+        Read Optimized
+
+    Transactional Data
+        Write Optimized
+
+    Realtime Data
+
+https://pet-library.moonhighway.com/
+
+
+
+GraphQL examples
+
+1.
+query {
+  totalPets
+}
+
+2. 
+query {
+  allPets {
+    id,
+    name
+  }
+}
+
+3. 
+query {
+  allPets {
+    id,
+    name
+  },
+  totalPets
+}
+
+4. 
+query {
+  allPets {
+    id,
+    name,
+    category
+  },
+  totalPets
+}
+
+5. 
+query {
+  allPets {
+    id,
+    name,
+    category,
+    photo {
+      full,
+      thumb
+    }
+  },
+  totalPets
+}
+
+6. 
+query filterPets($category : PetCategory = DOG $status : PetStatus ) {
+  allPets (status : $status category : $category) {
+    id
+    name
+    weight
+    category
+    status
+  }
+}
+
+query variables
+{
+  "status": "CHECKEDOUT"
+}
