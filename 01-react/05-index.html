@@ -9,13 +9,14 @@
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
     <script type="text/babel">
-        const Products = () => {
+        const Products = ({onListChange}) => {
             const [newProductName, setNewProductName] = React.useState('');
             const [productNames, setProductNames] = React.useState([]);
 
             const onBtnAddNewClick = () => {
                 const updatedProductNames = [...productNames, newProductName];
                 setProductNames(updatedProductNames);
+                onListChange(updatedProductNames);
             }
             const productItems = productNames.map(productName => (
                 <li key={productName}>
@@ -40,13 +41,26 @@
             )
         }
 
+        const ProductsCount = (props) => (
+            <div>
+                <span>Products Count : </span>
+                <span> [ {props.count} ]</span>
+            </div>
+        );
+
+        const App = () => {
+            const [productNames, setProductNames] = React.useState([]);
+            return (
+                <div>
+                    <ProductsCount count={productNames.length}/>
+                    <Products onListChange={ productNames => setProductNames(productNames) }/>
+                </div>
+            )
+        };
+
         ReactDOM.render(
             <div>
-                <div>
-                    <span>Products Count : </span>
-                    <span> [ 0 ]</span>
-                </div>
-                <Products />
+                <App />
             </div>, document.getElementById('root'));
     </script>
 </head>
