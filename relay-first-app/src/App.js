@@ -7,9 +7,19 @@ import {
 } from 'react-relay/hooks';
 import RelayEnvironment from './RelayEnvironment'
 
+import './App.css'
 const PetsQuery = graphql`
   query AppPetsQuery{
     totalPets
+    allPets{
+      name
+      weight
+      category
+      photo{
+        full
+        thumb
+      }
+    }
   }
 `;
 
@@ -24,6 +34,9 @@ function App(props){
       <div>
         Total Pets : {data.totalPets}
       </div>
+      <ol>
+        {data.allPets.map(pet => (<li key={pet.id}>{pet.name}</li>))}
+      </ol>
     </div>
   )
 }
