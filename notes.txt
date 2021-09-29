@@ -172,3 +172,47 @@ query variables
 {
   "status": "CHECKEDOUT"
 }
+
+
+GraphQL Client
+    Ajax APIs
+        fetch
+        axios
+
+    Apollo Client
+
+
+    Relay
+        Store
+        Colocation (data + presentation)
+        relay compiler
+        relay runtime
+
+    
+
+Setup application for Relay
+    1. Create a new project
+        yarn create react-app <app-name>
+
+    2. Install the dependencies
+        runtime dependencies
+            yarn add react-relay relay-runtime
+
+        dev dependencies
+            yarn add --dev relay-compiler graphql babel-plugin-relay
+
+        tools
+            yarn add global get-graphql-schema
+
+    3. get the schema from the server
+        get-graphql-schema <url> > schema.graphql
+
+    4. configure the compilter
+        "scripts" : {
+            ...
+            "relay" : "yarn run relay-compiler --schema schema.graphl --src ./src/"
+        }
+
+    5. configure 'fetch' to be used by relay
+
+    6. Create the environment
