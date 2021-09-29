@@ -18,11 +18,18 @@
                 setProductNames(updatedProductNames);
                 onListChange(updatedProductNames);
             }
+
+            const onBtnRemoveClick = (productName) => {
+                const updatedProductNames = productNames.filter(name => name !== productName);
+                setProductNames(updatedProductNames);
+                onListChange(updatedProductNames);
+            }
+
             const productItems = productNames.map(productName => (
                 <li key={productName}>
                     <span>{productName}</span>
                     <span>
-                         - [ <input type="button" value="Remove" /> ]
+                         - [ <input type="button" value="Remove" onClick={ () => onBtnRemoveClick(productName)} /> ]
                     </span>
                 </li>
             ));
@@ -30,7 +37,6 @@
                 <>
                     <h1>Products</h1>
                     <hr />
-                    
                     <label htmlFor="">Product Name :</label>
                     <input type="text" onChange={ evt => setNewProductName(evt.target.value)} />
                     <input type="button" value="Add New" onClick={onBtnAddNewClick} />
