@@ -20,7 +20,7 @@ function PetComponent(props){
     return (
         <div>
             <h3>{pet.name}</h3>
-            <img src={pet.photo.thumb}></img>
+            <img src={pet.photo.thumb} alt={pet.name}></img>
             <div>
                 <label>Weight : </label>
                 <span>{pet.weight}</span>
