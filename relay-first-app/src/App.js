@@ -7,13 +7,18 @@ import {
 } from 'react-relay/hooks';
 import RelayEnvironment from './RelayEnvironment'
 import PetComponent_pet from './__generated__/PetComponent_pet.graphql'
+import CustomersComponent_customer from './__generated__/CustomersComponent_customer.graphql'
 import PetComponent from './Pet'
+import CustomersComponent from './Customers'
 import './App.css'
 const PetsQuery = graphql`
   query AppPetsQuery{
     totalPets
     allPets{
       ...PetComponent_pet
+    }
+    allCustomers{
+      ...CustomersComponent_customer
     }
   }
 `;
@@ -22,6 +27,7 @@ const preloadedQuery = loadQuery(RelayEnvironment, PetsQuery, {});
 
 function App(props){
   const data = usePreloadedQuery(PetsQuery, preloadedQuery);
+  console.log(data)
   return (
     <div>
       <h1>Pets</h1>
@@ -31,7 +37,7 @@ function App(props){
       </div>
       
         {data.allPets.map(pet => (<PetComponent pet={pet}></PetComponent>))}
-      
+        {data.allCustomers.map(customer => <CustomersComponent customer={customer}></CustomersComponent>)}
     </div>
   )
 }

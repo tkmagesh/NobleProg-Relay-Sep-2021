@@ -8,12 +8,16 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type CustomersComponent_customer$ref = any;
 type PetComponent_pet$ref = any;
 export type AppPetsQueryVariables = {||};
 export type AppPetsQueryResponse = {|
   +totalPets: number,
   +allPets: $ReadOnlyArray<{|
     +$fragmentRefs: PetComponent_pet$ref
+  |}>,
+  +allCustomers: $ReadOnlyArray<{|
+    +$fragmentRefs: CustomersComponent_customer$ref
   |}>,
 |};
 export type AppPetsQuery = {|
@@ -30,6 +34,15 @@ query AppPetsQuery {
     ...PetComponent_pet
     id
   }
+  allCustomers {
+    ...CustomersComponent_customer
+  }
+}
+
+fragment CustomersComponent_customer on Customer {
+  name
+  username
+  dateCreated
 }
 
 fragment PetComponent_pet on Pet {
@@ -50,6 +63,13 @@ var v0 = {
   "args": null,
   "kind": "ScalarField",
   "name": "totalPets",
+  "storageKey": null
+},
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
   "storageKey": null
 };
 return {
@@ -72,6 +92,22 @@ return {
             "args": null,
             "kind": "FragmentSpread",
             "name": "PetComponent_pet"
+          }
+        ],
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "Customer",
+        "kind": "LinkedField",
+        "name": "allCustomers",
+        "plural": true,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "CustomersComponent_customer"
           }
         ],
         "storageKey": null
@@ -102,13 +138,7 @@ return {
             "name": "id",
             "storageKey": null
           },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "name",
-            "storageKey": null
-          },
+          (v1/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -150,20 +180,46 @@ return {
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "Customer",
+        "kind": "LinkedField",
+        "name": "allCustomers",
+        "plural": true,
+        "selections": [
+          (v1/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "username",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "dateCreated",
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "cde229608cf60a0ef2527093d90a8714",
+    "cacheID": "b18ae8b4dea53cd57fe1b6b7d631c9a3",
     "id": null,
     "metadata": {},
     "name": "AppPetsQuery",
     "operationKind": "query",
-    "text": "query AppPetsQuery {\n  totalPets\n  allPets {\n    ...PetComponent_pet\n    id\n  }\n}\n\nfragment PetComponent_pet on Pet {\n  id\n  name\n  weight\n  category\n  status\n  photo {\n    thumb\n  }\n}\n"
+    "text": "query AppPetsQuery {\n  totalPets\n  allPets {\n    ...PetComponent_pet\n    id\n  }\n  allCustomers {\n    ...CustomersComponent_customer\n  }\n}\n\nfragment CustomersComponent_customer on Customer {\n  name\n  username\n  dateCreated\n}\n\nfragment PetComponent_pet on Pet {\n  id\n  name\n  weight\n  category\n  status\n  photo {\n    thumb\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '8773f8bc3ca277ed341c149d82bbabf7';
+(node/*: any*/).hash = '3407303635136d8c41554db41fdfb830';
 
 module.exports = node;
