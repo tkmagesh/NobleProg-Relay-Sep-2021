@@ -8,18 +8,12 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type PetCategory = "CAT" | "DOG" | "RABBIT" | "STINGRAY" | "%future added value";
+type PetComponent_pet$ref = any;
 export type AppPetsQueryVariables = {||};
 export type AppPetsQueryResponse = {|
   +totalPets: number,
   +allPets: $ReadOnlyArray<{|
-    +name: string,
-    +weight: ?number,
-    +category: PetCategory,
-    +photo: ?{|
-      +full: ?string,
-      +thumb: ?string,
-    |},
+    +$fragmentRefs: PetComponent_pet$ref
   |}>,
 |};
 export type AppPetsQuery = {|
@@ -33,14 +27,19 @@ export type AppPetsQuery = {|
 query AppPetsQuery {
   totalPets
   allPets {
-    name
-    weight
-    category
-    photo {
-      full
-      thumb
-    }
+    ...PetComponent_pet
     id
+  }
+}
+
+fragment PetComponent_pet on Pet {
+  id
+  name
+  weight
+  category
+  status
+  photo {
+    thumb
   }
 }
 */
@@ -51,52 +50,6 @@ var v0 = {
   "args": null,
   "kind": "ScalarField",
   "name": "totalPets",
-  "storageKey": null
-},
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "weight",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "category",
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "Photo",
-  "kind": "LinkedField",
-  "name": "photo",
-  "plural": false,
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "full",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "thumb",
-      "storageKey": null
-    }
-  ],
   "storageKey": null
 };
 return {
@@ -115,10 +68,11 @@ return {
         "name": "allPets",
         "plural": true,
         "selections": [
-          (v1/*: any*/),
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/)
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "PetComponent_pet"
+          }
         ],
         "storageKey": null
       }
@@ -141,15 +95,57 @@ return {
         "name": "allPets",
         "plural": true,
         "selections": [
-          (v1/*: any*/),
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
             "name": "id",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "name",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "weight",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "category",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "status",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Photo",
+            "kind": "LinkedField",
+            "name": "photo",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "thumb",
+                "storageKey": null
+              }
+            ],
             "storageKey": null
           }
         ],
@@ -158,16 +154,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a7dbb9c633f8cebd75c42f1e5bf46c3a",
+    "cacheID": "cde229608cf60a0ef2527093d90a8714",
     "id": null,
     "metadata": {},
     "name": "AppPetsQuery",
     "operationKind": "query",
-    "text": "query AppPetsQuery {\n  totalPets\n  allPets {\n    name\n    weight\n    category\n    photo {\n      full\n      thumb\n    }\n    id\n  }\n}\n"
+    "text": "query AppPetsQuery {\n  totalPets\n  allPets {\n    ...PetComponent_pet\n    id\n  }\n}\n\nfragment PetComponent_pet on Pet {\n  id\n  name\n  weight\n  category\n  status\n  photo {\n    thumb\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '59719ddda9bc8539e49be2e4e70ca6c2';
+(node/*: any*/).hash = '8773f8bc3ca277ed341c149d82bbabf7';
 
 module.exports = node;
